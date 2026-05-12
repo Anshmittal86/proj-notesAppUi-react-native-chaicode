@@ -85,7 +85,7 @@ It includes a title input, multiline content input, image background header, bac
 Clone the repository:
 
 ```bash
-git clone proj-notesAppUi-react-native-chaicode
+git clone https://github.com/Anshmittal86/proj-notesAppUi-react-native-chaicode.git
 ```
 
 Move into project folder:
