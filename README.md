@@ -93,7 +93,7 @@ LinkedIn: [https://linkedin.com/in/Anshmittal86](https://linkedin.com/in/Anshmit
 Clone the repository:
 
 ```bash
-git clone proj-notesAppUi-react-native-chaicode
+git clone https://github.com/Anshmittal86/proj-notesAppUi-react-native-chaicode.git
 ```
 
 Move into project folder:
