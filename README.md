@@ -80,14 +80,6 @@ It includes a title input, multiline content input, image background header, bac
 
 ![Note Editor Screen](./assets/screenshots/note-editor.png)
 
-## Author
-
-Ansh
-
-GitHub: [https://github.com/Anshmittal86](https://github.com/Anshmittal86)
-
-LinkedIn: [https://linkedin.com/in/Anshmittal86](https://linkedin.com/in/Anshmittal86)
-
 ## Installation
 
 Clone the repository:
@@ -114,8 +106,10 @@ Start Expo server:
 npx expo start
 ```
 
-## Submission
+## Author
 
-Public GitHub Repository: [https://github.com/Anshmittal86/proj-notesAppUi-react-native-chaicode](https://github.com/Anshmittal86/proj-notesAppUi-react-native-chaicode)
+Ansh
 
-Demo Video: [https://drive.google.com/file/d/1d6mxKbOJNtnU8PL-hox56p5VNdWImck\_/view?usp=sharing](https://drive.google.com/file/d/1d6mxKbOJNtnU8PL-hox56p5VNdWImck_/view?usp=sharing)
+GitHub: [https://github.com/Anshmittal86](https://github.com/Anshmittal86)
+
+LinkedIn: [https://linkedin.com/in/Anshmittal86](https://linkedin.com/in/Anshmittal86)
