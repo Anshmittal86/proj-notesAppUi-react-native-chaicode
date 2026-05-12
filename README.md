@@ -1,56 +1,121 @@
-# Welcome to your Expo app 👋
+# Notes App UI
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern and responsive Notes App UI built using React Native and Expo.
+This project focuses on clean mobile UI design, responsive layouts, dark and light theme handling, and polished notes screens.
 
-## Get started
+## Tech Stack
 
-1. Install dependencies
+- React Native
+- Expo
+- TypeScript
+- React Hooks
+- Expo Vector Icons
+- React Native Safe Area Context
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- Modern Notes Listing Screen
+- Note Editor Screen UI
+- Responsive Layout for Phones and Tablets
+- Dark and Light Mode Support
+- Search Notes UI
+- Note Cards with Clean Visual Hierarchy
+- Image Background Header
+- Pressable Buttons
+- Multiline Note Input
+- Keyboard Friendly Editor Layout
+- Clean Component Structure
+- StyleSheet Based Styling
 
-   ```bash
-   npx expo start
-   ```
+## Components and Hooks Used
 
-In the output, you'll find options to open the app in a
+Components:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- View
+- Text
+- TextInput
+- Pressable
+- FlatList
+- Switch
+- ScrollView
+- ImageBackground
+- KeyboardAvoidingView
+- StatusBar
+- SafeAreaView
+- Ionicons
+- MaterialCommunityIcons
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Hooks:
 
-## Get a fresh project
+- useState
+- useColorScheme
+- useWindowDimensions
 
-When you're ready, run:
+## Screens
+
+### Notes Listing Screen
+
+The notes listing screen displays notes in a clean scrollable list using FlatList.
+It includes a search input, dark mode switch, note statistics, and modern note cards.
+
+### Note Editor Screen
+
+The note editor screen is designed for creating or editing a note.
+It includes a title input, multiline content input, image background header, back button, save button, tag option, and writing tools UI.
+
+## UI Enhancements
+
+- Clean card based layout
+- Left accent line on note cards
+- Tag pills for note categories
+- Soft shadows and rounded corners
+- Responsive spacing using useWindowDimensions
+- Theme based colors for dark and light mode
+- Professional header image in editor screen
+- Pressable feedback effect on buttons and cards
+
+## Screenshots
+
+![Notes Listing Screen](./assets/screenshots/notes-listing.png)
+
+![Note Editor Screen](./assets/screenshots/note-editor.png)
+
+## Author
+
+Ansh
+
+GitHub: [https://github.com/Anshmittal86](https://github.com/Anshmittal86)
+
+LinkedIn: [https://linkedin.com/in/Anshmittal86](https://linkedin.com/in/Anshmittal86)
+
+## Installation
+
+Clone the repository:
 
 ```bash
-npm run reset-project
+git clone proj-notesAppUi-react-native-chaicode
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Move into project folder:
 
-### Other setup steps
+```bash
+cd proj-notesAppUi-react-native-chaicode
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Install dependencies:
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Start Expo server:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+## Submission
 
-Join our community of developers creating universal apps.
+Public GitHub Repository: [https://github.com/Anshmittal86/proj-notesAppUi-react-native-chaicode](https://github.com/Anshmittal86/proj-notesAppUi-react-native-chaicode)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Demo Video: [https://drive.google.com/file/d/1d6mxKbOJNtnU8PL-hox56p5VNdWImck\_/view?usp=sharing](https://drive.google.com/file/d/1d6mxKbOJNtnU8PL-hox56p5VNdWImck_/view?usp=sharing)
