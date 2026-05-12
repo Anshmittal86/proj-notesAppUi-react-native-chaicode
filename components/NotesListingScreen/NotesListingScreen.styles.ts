@@ -134,6 +134,19 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		marginTop: 6,
 		lineHeight: 20
+	},
+
+	addButton: {
+		backgroundColor: '#8B5CF6',
+		borderRadius: 12,
+		flexDirection: 'row',
+		alignItems: 'center',
+		gap: 5
+	},
+
+	addButtonText: {
+		color: '#FFFFFF',
+		fontWeight: '800'
 	}
 });
 

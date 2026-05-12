@@ -1,5 +1,7 @@
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+// React hooks
 import { useEffect, useState } from 'react';
+
+// React Native core components
 import {
 	FlatList,
 	Pressable,
@@ -7,28 +9,43 @@ import {
 	Switch,
 	Text,
 	TextInput,
-	useColorScheme,
 	useWindowDimensions,
 	View
 } from 'react-native';
+
+// Third-party libraries
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+// Project constants and types
 import { Colors } from '../../constants/Colors';
-import { DUMMY_NOTES } from '../../constants/DummyData';
+import { Note } from '../../constants/DummyData';
+
+// Project components
 import NoteCard from '../NoteCard/NoteCard';
+
+// Styles
 import styles from './NotesListingScreen.styles';
 
 interface NotesListingScreenProps {
-	onOpenEditor: () => void;
+	notes: Note[];
+	isDarkMode: boolean;
+	setIsDarkMode: (value: boolean) => void;
+	onOpenAddNote: () => void;
+	onOpenEditNote: (note: Note) => void;
 }
 
-export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenProps) {
+export default function NotesListingScreen({
+	notes,
+	isDarkMode,
+	setIsDarkMode,
+	onOpenAddNote,
+	onOpenEditNote
+}: NotesListingScreenProps) {
 	const { width } = useWindowDimensions();
-	const systemColorScheme = useColorScheme();
 
 	const [searchQuery, setSearchQuery] = useState('');
-	const [filteredNotes, setFilteredNotes] = useState(DUMMY_NOTES);
-	const [isDarkMode, setIsDarkMode] = useState(systemColorScheme === 'dark');
+	const [filteredNotes, setFilteredNotes] = useState(notes);
 
 	const colors = isDarkMode ? Colors.dark : Colors.light;
 
@@ -43,11 +60,11 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 		const query = searchQuery.trim().toLowerCase();
 
 		if (!query) {
-			setFilteredNotes(DUMMY_NOTES);
+			setFilteredNotes(notes);
 			return;
 		}
 
-		const searchedNotes = DUMMY_NOTES.filter((note) => {
+		const searchedNotes = notes.filter((note) => {
 			const title = note.title.toLowerCase();
 			const content = note.content.toLowerCase();
 			const date = note.date.toLowerCase();
@@ -56,12 +73,10 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 		});
 
 		setFilteredNotes(searchedNotes);
-	}, [searchQuery]);
+	}, [searchQuery, notes]);
 
 	return (
-		<SafeAreaView
-			style={[styles.container, { backgroundColor: isDarkMode ? '#0F172A' : '#FDFDFF' }]}
-		>
+		<SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
 			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
 			<View style={[styles.header, { paddingHorizontal: scale(20) }]}>
@@ -79,10 +94,12 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 					</View>
 
 					<View style={styles.darkModeContainer}>
-						<View
-							style={[styles.moonCircle, { backgroundColor: isDarkMode ? '#4C1D95' : '#F3F4F6' }]}
-						>
-							<Ionicons name="moon" size={scale(14)} color={isDarkMode ? '#A78BFA' : '#6B7280'} />
+						<View style={[styles.moonCircle, { backgroundColor: colors.moonBackground }]}>
+							<Ionicons
+								name={isDarkMode ? 'moon' : 'sunny'}
+								size={scale(14)}
+								color={colors.moonIcon}
+							/>
 						</View>
 
 						{!isTablet && (
@@ -94,8 +111,8 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 						<Switch
 							value={isDarkMode}
 							onValueChange={setIsDarkMode}
-							trackColor={{ false: '#E5E7EB', true: '#4C1D95' }}
-							thumbColor="#FFFFFF"
+							trackColor={{ false: colors.border, true: colors.primaryDark }}
+							thumbColor={colors.buttonText}
 							style={{ transform: [{ scale: scale(0.8) }] }}
 						/>
 					</View>
@@ -105,18 +122,18 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 					style={[
 						styles.searchWrapper,
 						{
-							backgroundColor: isDarkMode ? '#1F2937' : '#F8FAFC',
+							backgroundColor: colors.searchBackground,
 							height: scale(50),
 							borderColor: colors.border
 						}
 					]}
 				>
-					<Ionicons name="search-outline" size={scale(18)} color="#94A3B8" />
+					<Ionicons name="search-outline" size={scale(18)} color={colors.placeholder} />
 
 					<TextInput
 						style={[styles.searchInput, { color: colors.text, fontSize: scale(15) }]}
 						placeholder="Search notes..."
-						placeholderTextColor="#94A3B8"
+						placeholderTextColor={colors.placeholder}
 						value={searchQuery}
 						onChangeText={setSearchQuery}
 						autoCorrect={false}
@@ -125,16 +142,21 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 
 					{searchQuery.length > 0 ?
 						<Pressable onPress={() => setSearchQuery('')} hitSlop={8}>
-							<Ionicons name="close-circle" size={scale(20)} color="#94A3B8" />
+							<Ionicons name="close-circle" size={scale(20)} color={colors.placeholder} />
 						</Pressable>
-					:	<MaterialCommunityIcons name="tune-variant" size={scale(20)} color="#64748B" />}
+					:	<MaterialCommunityIcons
+							name="tune-variant"
+							size={scale(20)}
+							color={colors.iconSecondary}
+						/>
+					}
 				</View>
 
 				<View
 					style={[
 						styles.statsContainer,
 						{
-							backgroundColor: isDarkMode ? '#1F2937' : '#FFFFFF',
+							backgroundColor: colors.cardBackground,
 							padding: scale(15)
 						}
 					]}
@@ -144,18 +166,18 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 							style={[
 								styles.iconCircle,
 								{
-									backgroundColor: '#F5F3FF',
+									backgroundColor: colors.statsIconBackground,
 									width: scale(40),
 									height: scale(40)
 								}
 							]}
 						>
-							<Ionicons name="document-text" size={scale(18)} color="#8B5CF6" />
+							<Ionicons name="document-text" size={scale(18)} color={colors.primary} />
 						</View>
 
 						<View>
 							<Text style={[styles.statNumber, { color: colors.text, fontSize: scale(16) }]}>
-								{DUMMY_NOTES.length}
+								{notes.length}
 							</Text>
 
 							<Text
@@ -166,20 +188,20 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 						</View>
 					</View>
 
-					<View style={styles.statDivider} />
+					<View style={[styles.statDivider, { backgroundColor: colors.divider }]} />
 
 					<View style={styles.statBox}>
 						<View
 							style={[
 								styles.iconCircle,
 								{
-									backgroundColor: '#F0FDF4',
+									backgroundColor: colors.pinIconBackground,
 									width: scale(40),
 									height: scale(40)
 								}
 							]}
 						>
-							<Ionicons name="pin" size={scale(18)} color="#22C55E" />
+							<Ionicons name="pin" size={scale(18)} color={colors.pinIcon} />
 						</View>
 
 						<View>
@@ -201,10 +223,28 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 						{searchQuery.trim() ? 'Search Results' : 'Recent Notes'}
 					</Text>
 
-					<Text style={[styles.resultCount, { color: colors.textSecondary, fontSize: scale(13) }]}>
-						{filteredNotes.length} notes
-					</Text>
+					<Pressable
+						onPress={onOpenAddNote}
+						style={[
+							styles.addButton,
+							{
+								backgroundColor: colors.primary,
+								paddingHorizontal: scale(14),
+								paddingVertical: scale(8)
+							}
+						]}
+					>
+						<Ionicons name="add" size={scale(18)} color={colors.buttonText} />
+
+						<Text style={[styles.addButtonText, { color: colors.buttonText, fontSize: scale(13) }]}>
+							Add Note
+						</Text>
+					</Pressable>
 				</View>
+
+				<Text style={[styles.resultCount, { color: colors.textSecondary, fontSize: scale(13) }]}>
+					{filteredNotes.length} notes
+				</Text>
 			</View>
 
 			<FlatList
@@ -237,7 +277,7 @@ export default function NotesListingScreen({ onOpenEditor }: NotesListingScreenP
 							title={item.title}
 							content={item.content}
 							date={item.date}
-							onPress={onOpenEditor}
+							onPress={() => onOpenEditNote(item)}
 							isDarkMode={isDarkMode}
 						/>
 					</View>

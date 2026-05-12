@@ -1,7 +1,13 @@
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
+// React Native core components
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+// Third-party libraries
+import { Ionicons } from '@expo/vector-icons';
+
+// Project constants
 import { Colors } from '../../constants/Colors';
+
+// Styles
 import styles from './NoteCard.styles';
 
 interface NoteCardProps {
@@ -10,15 +16,16 @@ interface NoteCardProps {
 	date: string;
 	accentColor?: string;
 	isDarkMode: boolean;
+	onPress: () => void;
 }
 
 export default function NoteCard({
 	title,
 	content,
 	date,
-
-	accentColor = '#8B5CF6',
-	isDarkMode
+	accentColor,
+	isDarkMode,
+	onPress
 }: NoteCardProps) {
 	const colors = isDarkMode ? Colors.dark : Colors.light;
 
@@ -35,12 +42,19 @@ export default function NoteCard({
 		color: colors.textSecondary
 	});
 
+	const dateStyle = StyleSheet.flatten([
+		styles.date,
+		{
+			color: colors.textSecondary
+		}
+	]);
+
 	return (
 		<Pressable
 			style={({ pressed }) => [containerStyle, pressed && styles.cardPressed]}
-			onPress={() => {}}
+			onPress={onPress}
 		>
-			<View style={[styles.accentLine, { backgroundColor: accentColor }]} />
+			<View style={[styles.accentLine, { backgroundColor: accentColor || colors.primary }]} />
 
 			<View style={styles.cardBody}>
 				<View style={styles.topRow}>
@@ -48,9 +62,9 @@ export default function NoteCard({
 						{title}
 					</Text>
 
-					<Pressable hitSlop={8} style={styles.menuButton}>
-						<Ionicons name="ellipsis-vertical" size={18} color={colors.textSecondary} />
-					</Pressable>
+					<View style={styles.menuButton}>
+						<Ionicons name="ellipsis-vertical" size={18} color={colors.iconSecondary} />
+					</View>
 				</View>
 
 				<Text style={contentStyle} numberOfLines={2}>
@@ -59,8 +73,9 @@ export default function NoteCard({
 
 				<View style={styles.bottomRow}>
 					<View style={styles.dateRow}>
-						<Ionicons name="calendar-outline" size={16} color={colors.textSecondary} />
-						<Text style={[styles.date, { color: colors.textSecondary }]} numberOfLines={1}>
+						<Ionicons name="calendar-outline" size={16} color={colors.iconSecondary} />
+
+						<Text style={dateStyle} numberOfLines={1}>
 							{date}
 						</Text>
 					</View>
